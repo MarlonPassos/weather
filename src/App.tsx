@@ -1,9 +1,11 @@
 import React from 'react'
 
+import Typography from '@material-ui/core/Typography'
+
 const App: React.FC = () => {
   return (
     <div>
-      <h1>Weather</h1>
+      <Typography variant="h1">Weather</Typography>
     </div>
   )
 }
