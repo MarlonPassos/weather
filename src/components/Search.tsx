@@ -2,19 +2,16 @@ import React from 'react'
 import { useForm } from 'react-hook-form'
 import { useDispatch } from 'react-redux'
 
-import { TextField, Typography, Button, makeStyles, Theme } from '@material-ui/core'
+import { TextField, Button, makeStyles, Theme } from '@material-ui/core'
 
 import { getWeather } from '../store/actions/weatherActions'
 
-interface SearchProps {
-  title: string
-}
 interface ICity {
   city: string
 }
 const useStyles = makeStyles((theme: Theme) => ({
   form: {
-    width: '100%', // Fix IE 11 issue.
+    width: '100%',
     marginTop: theme.spacing(1)
   },
   submit: {
@@ -22,20 +19,19 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }))
 
-const Search: React.FC<SearchProps> = ({ title }) => {
+const Search: React.FC = () => {
   const dispatch = useDispatch()
-  const { register, handleSubmit, errors } = useForm<ICity>()
+  const { register, handleSubmit, errors, reset } = useForm<ICity>()
 
   const classes = useStyles()
 
-  const onSubmit = (data: ICity, e: any) => {
+  const onSubmit = (data: ICity) => {
     dispatch(getWeather(data.city))
-    e.target.reset()
+    reset()
   }
 
   return (
     <>
-      <Typography variant="h4">{title}</Typography>
       <form onSubmit={handleSubmit(onSubmit)} className={classes.form}>
         <TextField
           autoFocus

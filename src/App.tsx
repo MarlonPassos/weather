@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 
-import { CssBaseline, Typography } from '@material-ui/core'
+import { CssBaseline, Typography, Card, CardContent, CardHeader } from '@material-ui/core'
 import Container from '@material-ui/core/Container'
 import { Theme, makeStyles } from '@material-ui/core/styles'
 
@@ -10,7 +10,11 @@ import Weather from './components/Weather'
 import { RootState } from './store'
 
 const useStyles = makeStyles((theme: Theme) => ({
-  paper: {
+  card: {
+    minWidth: 445,
+    minHeight: 550
+  },
+  container: {
     marginTop: theme.spacing(8),
     display: 'flex',
     flexDirection: 'column',
@@ -27,10 +31,25 @@ const App: React.FC = () => {
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
-      <div className={classes.paper}>
-        <Search title="Weather" />
-        {loading ? <Typography variant="h3">Loading...</Typography> : weatherData && <Weather data={weatherData} />}
-        {error && <Typography variant="h3">City not found</Typography>}
+      <div className={classes.container}>
+        <Card className={classes.card}>
+          <CardHeader title="Weather" />
+          <CardContent>
+            <Search />
+            {loading ? (
+              <Typography variant="h6" align="center">
+                Loading...
+              </Typography>
+            ) : (
+              weatherData && <Weather data={weatherData} />
+            )}
+            {error && (
+              <Typography variant="h6" align="center">
+                City not found
+              </Typography>
+            )}
+          </CardContent>
+        </Card>
       </div>
     </Container>
   )
