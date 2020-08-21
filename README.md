@@ -6,4 +6,6 @@
 * Redux [link to Redux!](https://redux.js.org/basics/usage-with-react)
 * React Hook Form [link to Hook-Form!](https://react-hook-form.com/api)
 * OpenWeather - Current weather data [link to OpenWeather!](https://openweathermap.org/current)
-* TypeScript [link to Material-UI!](https://material-ui.com/pt/)
+
+#### Weather App
+![Image of Yaktocat](https://github.com/MarlonPassos/weather/blob/master/img/weather-app.png)
