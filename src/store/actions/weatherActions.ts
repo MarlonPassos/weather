@@ -3,36 +3,38 @@ import axios from 'axios'
 
 import { GET_WEATHER, WeatherAction, SET_LOADING, SET_ERROR, WeatherData, WeatherError } from '../types'
 
-import { RootSstate } from '..'
+import { RootState } from '..'
 
-export const getWeather = (city: string): ThunkAction<void, RootSstate, null, WeatherAction> => {
+export const getWeather = (city: string): ThunkAction<void, RootState, null, WeatherAction> => {
   return async (dispatch) => {
+    dispatch(setLoading())
     try {
       const res = await axios.get(
         `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${process.env.REACT_APP_API_KEY}`
       )
-      dispatch({
-        type: GET_WEATHER,
-        payload: res.data
-      })
+      dispatch(getWeatherLocal(res.data))
     } catch (err) {
-      dispatch({
-        type: SET_ERROR,
-        payload: err.message
-      })
+      dispatch(setError(err))
     }
   }
 }
 
-export const setLoading = (): WeatherAction => {
+const setLoading = (): WeatherAction => {
   return {
     type: SET_LOADING
   }
 }
 
-export const setError = (): WeatherAction => {
+const setError = (err: WeatherError): WeatherAction => {
   return {
     type: SET_ERROR,
-    payload: ''
+    payload: err.message
+  }
+}
+
+const getWeatherLocal = (data: WeatherData): WeatherAction => {
+  return {
+    type: GET_WEATHER,
+    payload: data
   }
 }
