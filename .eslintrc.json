@@ -48,7 +48,8 @@
         "@typescript-eslint/consistent-type-definitions": "off",
         "@typescript-eslint/strict-boolean-expressions": "off",
         "@typescript-eslint/camelcase": "off",
-        "camelcase": "off"
+        "camelcase": "off",
+        "react/prop-types": 0
         
     }
 }
